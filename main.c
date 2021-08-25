@@ -19,6 +19,8 @@ int main(int argc, char *argv[]){
     {
         if (i == 1) feature1(inFile, inFileOut);
         if (i == 2) feature2(inFile, inFileOut);
+        if (i == 3) feature3(inFile, inFileOut);
+
     }
     
     fclose(inFile);
