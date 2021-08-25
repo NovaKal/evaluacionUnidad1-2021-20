@@ -18,6 +18,7 @@ int main(int argc, char *argv[]){
     for (int i = 0; i < 6; i++)
     {
         if (i == 1) feature1(inFile, inFileOut);
+        if (i == 2) feature2(inFile, inFileOut);
     }
     
     fclose(inFile);
