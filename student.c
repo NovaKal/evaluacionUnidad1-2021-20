@@ -19,7 +19,7 @@ void feature1(FILE *fin, FILE *fout) {
 }
 
 void feature2(FILE *fin, FILE *fout) {
-    
+
     char buffer[70];
     char *status = NULL;
 
@@ -61,6 +61,24 @@ void feature3(FILE *fin, FILE *fout) {
 
         fprintf(fout, "%d", suma);
     }
+
+    printf("\n");
+    fflush(fin);
+}
+
+void feature4(FILE *fin, int **parr, int *length, char **op) {
+    //Esto se hace con la lectura 11. Memoria Dinamica porque si guarda algo aqui, cuando se acabe de ejecutar, se va el stack a la mierda
+    
+    //**int par es un puntero que guarda la direccion de otro puntero de tipo int que guarda la direccion de una variable tipo int
+    char buffer[64];
+    char *status = NULL;
+
+    status = fgets(buffer, sizeof(buffer), fin);
+
+    if (status != NULL) {
+
+    }
+
     printf("\n");
     fflush(fin);
 }
