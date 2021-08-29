@@ -4,7 +4,6 @@
 #include "student.h"
 
 void feature1(FILE *fin, FILE *fout) {
-    
     char buffer[64];
     char *status = NULL;
 
@@ -18,8 +17,7 @@ void feature1(FILE *fin, FILE *fout) {
     fflush(fin);
 }
 
-void feature2(FILE *fin, FILE *fout) {
-    
+void feature2(FILE *fin, FILE *fout) {    
     char buffer[70];
     char *status = NULL;
 
@@ -38,8 +36,7 @@ void feature2(FILE *fin, FILE *fout) {
     fflush(fin);
 }
 
-void feature3(FILE *fin, FILE *fout) {
-    
+void feature3(FILE *fin, FILE *fout) { 
     char buffer[64];
     char *endptr;
     char *saveEndptr;
@@ -64,3 +61,38 @@ void feature3(FILE *fin, FILE *fout) {
     printf("\n");
     fflush(fin);
 }
+
+void feature4(FILE *fin, int **parr, int *length, char **op) {
+    char buffer[64];
+    char *endptr;
+    char *saveEndptr;
+    char *status = NULL;
+    int numero = 1;
+    int i = 0;
+    int total;
+
+    status = fgets(buffer, sizeof(buffer), fin);
+
+    if (status != NULL) {
+
+        saveEndptr = buffer;
+
+        while (*saveEndptr != 0x0a && numero != 0) {
+            numero = strtol(saveEndptr, &endptr, 10);
+            if (numero == 0) continue;
+            (*parr)[i] = numero;
+            saveEndptr = endptr;
+            i++;
+        }
+
+        for (int j = 0; j < strlen(endptr); j++) {
+            (*op)[j] = endptr[j];
+        }
+
+        *length = i;
+    }
+
+    printf("\n");
+    fflush(fin);
+}
+
