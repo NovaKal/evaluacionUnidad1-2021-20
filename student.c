@@ -14,7 +14,6 @@ void feature1(FILE *fin, FILE *fout) {
     }
 
     printf("\n");
-    fflush(fin);
 }
 
 void feature2(FILE *fin, FILE *fout) {    
@@ -33,7 +32,6 @@ void feature2(FILE *fin, FILE *fout) {
     }
     
     printf("\n");
-    fflush(fin);
 }
 
 void feature3(FILE *fin, FILE *fout) { 
@@ -56,10 +54,9 @@ void feature3(FILE *fin, FILE *fout) {
             saveEndptr = endptr;
         }
 
-        fprintf(fout, "%d", suma);
+        fprintf(fout, "%d\n", suma);
     }
     printf("\n");
-    fflush(fin);
 }
 
 void feature4(FILE *fin, int **parr, int *length, char **op) {
@@ -86,13 +83,24 @@ void feature4(FILE *fin, int **parr, int *length, char **op) {
         }
 
         for (int j = 0; j < strlen(endptr); j++) {
-            (*op)[j] = endptr[j];
+            (*op)[j] = endptr[j+1];
         }
 
         *length = i;
     }
 
     printf("\n");
-    fflush(fin);
 }
 
+void feature5(FILE *fout, int *parr, int length, char *op) {
+    int suma = 0;
+
+    for (int i = 0; i < length; i++) {
+        suma += parr[i];
+    }
+
+    suma /= length;
+    fprintf(fout, "%d\n", suma);
+
+    printf("\n");
+}

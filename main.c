@@ -32,6 +32,7 @@ int main(int argc, char *argv[]) {
     feature2(inFile, inFileOut);
     feature3(inFile, inFileOut);
     feature4(inFile, parr, length, op);
+    feature5(inFileOut, auxparr, *length, auxop);
     
     destroy_array(auxparr);
     destroy_String(auxop);
