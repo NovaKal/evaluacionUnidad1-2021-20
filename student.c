@@ -87,6 +87,7 @@ void feature4(FILE *fin, int **parr, int *length, char **op) {
         }
 
         *length = i;
+
     }
 
     printf("\n");
@@ -101,6 +102,51 @@ void feature5(FILE *fout, int *parr, int length, char *op) {
 
     suma /= length;
     fprintf(fout, "%d\n", suma);
+
+    printf("\n");
+}
+
+void feature6(FILE *fin, struct Obj_t *pobj) {
+    //Queda complicado explicar que fue lo que hice en este feature
+    char buffer[64];
+    char *status = NULL;
+    char *endptr;
+    int posFinalName = 0;
+    int posFinalCC = 0;
+    long ccNumero;
+
+    status = fgets(buffer, sizeof(buffer), fin);
+
+    if (status != NULL) {
+        for (int i = 0; i < sizeof(buffer); i++) {
+            if (buffer[i] == 44) {
+                posFinalName = i;
+            }
+            if (buffer[i] == 10) {
+                posFinalCC = i;
+                i = sizeof(buffer);
+            }
+        }
+
+        int sizeObjNombre = sizeof(pobj->nombre);
+        char name[sizeObjNombre];
+        for (int i = 0; i < sizeof(pobj->nombre); i++) {
+            name[i] = buffer[i];
+        }
+        
+        name[sizeof(name)] = 0;
+        
+        int j = 0;
+        char numero[posFinalCC - posFinalName];
+        for (int i = posFinalName + 1; i < posFinalCC; i++) {
+            numero[j] = buffer[i];
+            j++;
+        }
+        ccNumero = strtol(numero, &endptr, 10);
+
+        pobj->nombre = name;
+        pobj->cedula = ccNumero;
+    }
 
     printf("\n");
 }

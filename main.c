@@ -7,38 +7,46 @@ int *create_array(int);
 char *create_String(int);
 void destroy_array(int *);
 void destroy_String(char *);
+struct Obj_t;
 
 int main(int argc, char *argv[]) {
 
     FILE *inFile = fopen("./fin", "r");
-    FILE *inFileOut = fopen("./fout", "a+");
+    FILE *outFile = fopen("./fout", "a+");
+
+    struct Obj_t obj1;
+    struct Obj_t *pobj1 = &obj1;
+
     char *auxop = create_String(10);
     char **op = &auxop;
     int *auxparr = create_array(20);
     int **parr = &auxparr;
-    int *length;
-    
+    int auxlength;
+    int *length = &auxlength;
+
     if (inFile == NULL) {
         perror("Open file fin fails: ");
         return(EXIT_FAILURE);
     }
 
-    if (inFileOut == NULL) {
+    if (outFile == NULL) {
         perror("Open file fout fails: ");
         return(EXIT_FAILURE);
     }
 
-    feature1(inFile, inFileOut);
-    feature2(inFile, inFileOut);
-    feature3(inFile, inFileOut);
+    feature1(inFile, outFile);
+    feature2(inFile, outFile);
+    feature3(inFile, outFile);
     feature4(inFile, parr, length, op);
-    feature5(inFileOut, auxparr, *length, auxop);
+    feature5(outFile, auxparr, *length, auxop);
+
+    feature6(inFile, pobj1);
     
     destroy_array(auxparr);
     destroy_String(auxop);
     
     fclose(inFile);
-    fclose(inFileOut);
+    fclose(outFile);
     
     return EXIT_SUCCESS;
 }
