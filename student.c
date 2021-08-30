@@ -129,7 +129,7 @@ void feature6(FILE *fin, struct Obj_t *pobj) {
         }
 
         int sizeObjNombre = sizeof(pobj->nombre);
-        char name[sizeObjNombre];
+        char name[8];
         for (int i = 0; i < sizeof(pobj->nombre); i++) {
             name[i] = buffer[i];
         }
@@ -149,4 +149,8 @@ void feature6(FILE *fin, struct Obj_t *pobj) {
     }
 
     printf("\n");
+}
+
+void feature7(FILE *fout, struct Obj_t *pobj) {
+    fprintf(fout, "%d,%s", pobj->cedula, pobj->nombre);
 }

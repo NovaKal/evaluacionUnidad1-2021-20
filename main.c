@@ -40,7 +40,17 @@ int main(int argc, char *argv[]) {
     feature4(inFile, parr, length, op);
     feature5(outFile, auxparr, *length, auxop);
 
+/*************************************************/
+/*Este feature esta conteido por ser muy problematico
+    Se le acusa de generar errores inexplicables
+    Generar segmentation fault cuando no debe
+    Alterar las propiedades de otros feature*/
+    
     feature6(inFile, pobj1);
+/*************************************************/
+    //printf("%p\n", &obj1.nombre);
+    //printf("%s\n", obj1.nombre);
+    feature7(outFile, pobj1);
     
     destroy_array(auxparr);
     destroy_String(auxop);
