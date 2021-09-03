@@ -38,9 +38,7 @@ int main(int argc, char *argv[]){
     feature6(inFile, &pobj);
     feature7(outFile, &pobj);
     feature8(inFile, &pCourse, &lengthCourse);
-
-    fclose(inFile);
-    fclose(outFile);
+    feature9(outFile, pCourse, lengthCourse);
     
     return EXIT_SUCCESS;
 }

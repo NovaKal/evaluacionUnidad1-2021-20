@@ -204,16 +204,54 @@ void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length) {
                 for (j = 0; j < strlen(token); j++) {
                     auxpobj[i].name[j] = token[j];
                 }
-                //printf("%d. Name: %s\n", i + 1, auxpobj[i].name);
                 token = strtok(NULL, sep);
                 auxpobj[i].credits = strtol(token, &endptr, 10);
-                //printf("%d. Credits: %d\n", i + 1, auxpobj[i].credits);
                 token = strtok(NULL, sep);
                 auxpobj[i].grade = strtol(token, &endptr, 10);
-                //printf("%d. Grade: %f\n", i + 1, auxpobj[i].grade);
             }
         }
         *pobj = auxpobj;
         *length = numero;
     }
+
+    fclose(fin);
+}
+
+void feature9(FILE *fout, struct _courseInfo_t *pobj,int length) {
+    char ans[2];
+    int i;
+    int totalCreds = 0;
+    float credXgrade = 0;
+    float wam;
+
+    for(i = 0; i < length; i++) {
+        totalCreds += pobj[i].credits;
+        credXgrade += pobj[i].credits * pobj[i].grade;
+        wam = credXgrade / totalCreds;
+    }
+    
+    printf("deseas almacenar la información (s) o (n): ");
+    if (fgets(ans, 2, stdin) != NULL) {
+        ans[strlen(ans) -1 ] = 0;
+    }
+
+    if (strcmp(ans, "n")) {
+        fprintf(fout, "\n%f", wam);
+    }
+    if (strcmp(ans, "s")) {
+        for(i = 0; i < length; i++) {
+            fprintf(fout, "%c", 10);
+            fprintf(fout, "%s", pobj[i].name);
+            fprintf(fout, "%c", 44);
+            fprintf(fout, "%d", pobj[i].credits);
+            fprintf(fout, "%c", 44);
+            fprintf(fout, "%f", pobj[i].grade);
+        }
+        fprintf(fout, "%c", 10);
+        fprintf(fout, "%s", "promedio ponderado: ");
+        fprintf(fout, "%f", wam);
+    }
+    
+    free(pobj);
+    fclose(fout);
 }
