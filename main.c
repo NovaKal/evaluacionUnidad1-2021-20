@@ -34,6 +34,7 @@ int main(int argc, char *argv[]){
     feature4(inFile, &parr, &length, &op);
     feature5(outFile, parr, length, op);
     feature6(inFile, &pobj);
+    feature7(outFile, &pobj);
 
     fclose(inFile);
     fclose(outFile);

@@ -168,3 +168,10 @@ void feature6(FILE *fin, struct Obj_t *pobj) {
         pobj->cedula = strtol(token, &endptr, 10);
     }
 }
+
+void feature7(FILE *fout, struct Obj_t *pobj) {
+    fprintf(fout, "%s", "\n");
+    fprintf(fout, "%d", pobj->cedula);
+    fprintf(fout, "%s", ",");
+    fprintf(fout, "%s", pobj->nombre);
+}
