@@ -107,6 +107,42 @@ void feature4(FILE *fin, int **parr, int *length, char **op) {
     }
 }
 
-feature5(FILE *fout, int *parr, int length, char *op) {
+void feature5(FILE *fout, int *parr, int length, char *op) {
+    char *avg = "avg";
+    char *max = "max";
+    char *min = "min";
+    int resultado;
+    int i;
 
+    if (strcmp(op, avg) == 0) {
+        int promedio = 0;
+        for (i = 0; i < length; i++) {
+            promedio += parr[i];
+        }
+        promedio /= length;
+        fprintf(fout, "\n%d", promedio);
+    }
+
+    if (strcmp(op, max) == 0) {
+        int max = parr[0];
+        for (i = 1; i < length; i++) {
+            if (parr[i] > max) {
+                max = parr[i];
+            }
+        }
+        fprintf(fout, "\n%d", max);
+    }
+
+    if (strcmp(op, min) == 0) {
+        int min = parr[0];
+        for (i = 1; i < length; i++) {
+            if (parr[i] < min) {
+                min = parr[i];
+            }
+        }
+        fprintf(fout, "\n%d", min);
+    }
+
+    free(parr);
+    free(op);
 }
