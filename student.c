@@ -46,6 +46,7 @@ void feature3(FILE *fin, FILE *fout) {
 }
 
 void feature4(FILE *fin, int **parr, int *length, char **op) {
+    /*Variables Generales*/
     char buffer[128];
     char *status = NULL;
     char *endptr;
@@ -53,38 +54,59 @@ void feature4(FILE *fin, int **parr, int *length, char **op) {
     char *auxop;
     int *auxparr;
     int lengthChars;
+
     status = fgets(buffer, sizeof(buffer), fin);
 
     if (status != NULL) {
+        /*Variables si existe texto*/
         int i;
+        int numero;
+        int j = 0;
         int posStart;
-        //strlen(buffer) es 33. En 33 esta el 0, 32 esta el \n y 31 el ultimo char
+
+        /*Conocer length de los chars que indican operacion*/
         for (i = strlen(buffer) - 2; i >= 0; i--) {
             if (buffer[i] == 32) {
                 posStart = i;
                 lengthChars = strlen(buffer) - i - 1;
                 break;
             }
-            //printf("buffer[i]: %c, %d\n", buffer[i], i);
         }
 
+        /*Conocer cantidad de numeros*/
         saveEndptr = buffer;
         while (*saveEndptr != 10) {
             if (strtol(saveEndptr, &endptr, 10) == 0) {
                 break;
             }
-            //printf("%d\n", numero);
             saveEndptr = endptr;
             *length += 1;
         }
-        printf("Length: %d\n", *length);
-        //printf("Aua: %d\n", lengthChars); -> 4
+
+        /*Crear malloc int, agregar y pasar dir*/
+        auxparr = malloc(sizeof(int) * (*length));
+        saveEndptr = buffer;
+        while (*saveEndptr != 10) {
+            numero = strtol(saveEndptr, &endptr, 10);
+            if (numero == 0) {
+                break;
+            }
+            auxparr[j] = numero;
+            saveEndptr = endptr;
+            j++;
+        }
+        *parr = auxparr;
+
+        /*Crear malloc char, agregar y pasar dir*/
         auxop = malloc(sizeof(char) * lengthChars);
         for (i = 0; i < lengthChars; i++) {
             auxop[i] = buffer[strlen(buffer) - lengthChars + i];
             if (i == lengthChars - 1) auxop[i] = 0;
-            //printf("auxop[%d] = %d\n", i, auxop[i]);
         }
         *op = auxop;
     }
+}
+
+feature5(FILE *fout, int *parr, int length, char *op) {
+
 }

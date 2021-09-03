@@ -31,7 +31,9 @@ int main(int argc, char *argv[]){
     feature2(inFile, outFile);
     feature3(inFile, outFile);
     feature4(inFile, &parr, &length, &op);
-
+    feature5(outFile, parr, length, op);
+    free(parr);
+    free(op);
     fclose(inFile);
     fclose(outFile);
     
