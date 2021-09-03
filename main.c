@@ -3,7 +3,11 @@
 #include <stdio.h>
 #include "student.h"
 
-int main(int argc, char *argv[]){
+int *create_array(int);
+char *create_String(int);
+void destroy_array(int *);
+void destroy_String(char *);
+struct Obj_t;
 
     if (argc == 1 || argc > 4) {
         perror("La cantidad de archivos necesarios para la ejecucion es incorrecta.");
@@ -38,4 +42,20 @@ int main(int argc, char *argv[]){
     fclose(outFile);
     
     return EXIT_SUCCESS;
+}
+
+int *create_array(int size){
+    return (int * ) malloc(size * sizeof(int));
+}
+
+char *create_String(int size) {
+    return (char * ) malloc(size  * sizeof(char));
+}
+
+void destroy_array(int *this){
+    free(this);
+}
+
+void destroy_String(char *this){
+    free(this);
 }
