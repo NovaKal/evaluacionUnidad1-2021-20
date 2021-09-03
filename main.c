@@ -25,8 +25,10 @@ int main(int argc, char *argv[]){
 
     int *parr;
     int length = 0;
+    int lengthCourse = 0;
     char *op;
     struct Obj_t pobj = {NULL, 0};
+    struct _courseInfo_t *pCourse;
 
     feature1(inFile, outFile);
     feature2(inFile, outFile);
@@ -35,6 +37,7 @@ int main(int argc, char *argv[]){
     feature5(outFile, parr, length, op);
     feature6(inFile, &pobj);
     feature7(outFile, &pobj);
+    feature8(inFile, &pCourse, &lengthCourse);
 
     fclose(inFile);
     fclose(outFile);

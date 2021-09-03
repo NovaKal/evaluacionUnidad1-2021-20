@@ -142,7 +142,7 @@ void feature5(FILE *fout, int *parr, int length, char *op) {
         }
         fprintf(fout, "\n%d", min);
     }
-
+    
     free(parr);
     free(op);
 }
@@ -174,4 +174,46 @@ void feature7(FILE *fout, struct Obj_t *pobj) {
     fprintf(fout, "%d", pobj->cedula);
     fprintf(fout, "%s", ",");
     fprintf(fout, "%s", pobj->nombre);
+
+    free(pobj->nombre);
+}
+
+void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length) {
+    char buffer[128];
+    char *status = NULL;
+    char *endptr;
+    struct _courseInfo_t *auxpobj;
+
+    status = fgets(buffer, sizeof(buffer), fin);
+
+    if (status != NULL) {
+        char input[64];
+        char *token;
+        char sep[2] = ",";
+        int numero;
+        int i;
+        int j;
+
+        numero = strtol(buffer, &endptr, 10);
+        auxpobj = malloc(sizeof(struct _courseInfo_t) * numero);
+        for (i = 0; i < numero; i++) {
+            printf("ingresa el curso %d: ", i + 1);
+            if (fgets(input, 64, stdin) != NULL) {
+                input[strlen(input) -1 ] = 0;
+                token = strtok(input, sep);
+                for (j = 0; j < strlen(token); j++) {
+                    auxpobj[i].name[j] = token[j];
+                }
+                //printf("%d. Name: %s\n", i + 1, auxpobj[i].name);
+                token = strtok(NULL, sep);
+                auxpobj[i].credits = strtol(token, &endptr, 10);
+                //printf("%d. Credits: %d\n", i + 1, auxpobj[i].credits);
+                token = strtok(NULL, sep);
+                auxpobj[i].grade = strtol(token, &endptr, 10);
+                //printf("%d. Grade: %f\n", i + 1, auxpobj[i].grade);
+            }
+        }
+        *pobj = auxpobj;
+        *length = numero;
+    }
 }
