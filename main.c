@@ -26,14 +26,15 @@ int main(int argc, char *argv[]){
     int *parr;
     int length = 0;
     char *op;
+    struct Obj_t pobj = {NULL, 0};
 
     feature1(inFile, outFile);
     feature2(inFile, outFile);
     feature3(inFile, outFile);
     feature4(inFile, &parr, &length, &op);
     feature5(outFile, parr, length, op);
+    feature6(inFile, &pobj);
 
-    
     fclose(inFile);
     fclose(outFile);
     

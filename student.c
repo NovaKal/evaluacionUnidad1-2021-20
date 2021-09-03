@@ -146,3 +146,25 @@ void feature5(FILE *fout, int *parr, int length, char *op) {
     free(parr);
     free(op);
 }
+
+void feature6(FILE *fin, struct Obj_t *pobj) {
+    char buffer[128];
+    char *endptr;
+    char *status = NULL;
+    char *token;
+    char sep[2] = ",";
+    char *rest;
+    int i;
+
+    status = fgets(buffer, sizeof(buffer), fin);
+    if (status != NULL) {
+        token = strtok(buffer, sep);
+        char *auxname = malloc(sizeof(char) * strlen(token));
+        for (i = 0; i < strlen(token); i++) {
+            auxname[i] = token[i];
+        }
+        pobj->nombre = auxname;
+        token = strtok(NULL, ",");
+        pobj->cedula = strtol(token, &endptr, 10);
+    }
+}
