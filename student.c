@@ -207,7 +207,8 @@ void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length) {
                 token = strtok(NULL, sep);
                 auxpobj[i].credits = strtol(token, &endptr, 10);
                 token = strtok(NULL, sep);
-                auxpobj[i].grade = strtol(token, &endptr, 10);
+                auxpobj[i].grade = atof(token);
+                printf("%f\n", auxpobj[i].grade);
             }
         }
         *pobj = auxpobj;
@@ -237,6 +238,7 @@ void feature9(FILE *fout, struct _courseInfo_t *pobj,int length) {
 
     if (strcmp(ans, "n")) {
         fprintf(fout, "\n%f", wam);
+        printf("error");
     }
     if (strcmp(ans, "s")) {
         for(i = 0; i < length; i++) {
