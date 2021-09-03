@@ -9,6 +9,7 @@ int main(int argc, char *argv[]){
         perror("La cantidad de archivos necesarios para la ejecucion es incorrecta.");
         return(EXIT_FAILURE);
     }
+
     FILE *inFile = fopen(argv[1], "r");
     FILE *outFile = fopen("./fout", "a+");
 
@@ -22,10 +23,14 @@ int main(int argc, char *argv[]){
         return(EXIT_FAILURE);
     }
 
+    int *parr;
+    int length = 0;
+    char *op;
 
     feature1(inFile, outFile);
     feature2(inFile, outFile);
     feature3(inFile, outFile);
+    feature4(inFile, &parr, &length, &op);
 
     fclose(inFile);
     fclose(outFile);
